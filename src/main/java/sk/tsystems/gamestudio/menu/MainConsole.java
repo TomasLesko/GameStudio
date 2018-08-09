@@ -16,14 +16,15 @@ public class MainConsole {
 		System.out.println("3. MineSweeper");
 		Scanner scanner = new Scanner(System.in);
 		int input = Integer.parseInt(scanner.nextLine());
+
 		
 		if (input == 1) {
 			GuessnumberMain guessnumbermain = new GuessnumberMain();
 			guessnumbermain.startGuessnumber();
 		}
-
+		
 		if (input == 2) {
-			PuzzleMain puzzlemain = new PuzzleMain();
+			PuzzleMain puzzlemain = new PuzzleMain(); 
 			puzzlemain.startPuzzle();
 			}
 
