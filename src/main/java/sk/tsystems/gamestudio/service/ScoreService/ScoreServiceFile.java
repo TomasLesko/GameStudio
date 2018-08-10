@@ -8,18 +8,16 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import sk.tsystems.gamestudio.entity.Score;
 
 
 public class ScoreServiceFile implements ScoreService {
-	private String game;
 	
 	private List<Score> scores = new ArrayList<>();
 	
-	public ScoreServiceFile(String game) {
-		this.game = game;
-	}
-	
+
 	/* (non-Javadoc)
 	 * @see puzzle.score.ScoreService#addScore(puzzle.score.Score)
 	 */
@@ -35,12 +33,14 @@ public class ScoreServiceFile implements ScoreService {
 	@Override
 	public List<Score> getBestScores(String gameName) {
 		load();
-		scores.sort(Comparator.comparing(Score::getPoints).reversed());
-		return scores;
+		return scores.stream()
+				.filter((score)->gameName.equals(score.getGame()))
+				.sorted(Comparator.comparing(Score::getPoints).reversed())
+				.collect(Collectors.toList());
 	}
 	
 	private String getFileName() {
-		return game + ".bin";
+		return "score.bin";
 	}
 	
 	private void save() {
@@ -56,6 +56,7 @@ public class ScoreServiceFile implements ScoreService {
 		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(getFileName()))) {
 			scores = (List<Score>)ois.readObject();
 		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
 			System.err.println("Cannot load score!");
 		}
 	}

@@ -1,9 +1,12 @@
-package sk.tsystems.gamestudio.game.mines.consoleUI;
+package sk.tsystems.gamestudio.game.mines.ui;
 
 import java.util.Date;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import sk.tsystems.gamestudio.entity.Score;
+import sk.tsystems.gamestudio.game.Game;
 import sk.tsystems.gamestudio.game.mines.core.Clue;
 import sk.tsystems.gamestudio.game.mines.core.Field;
 import sk.tsystems.gamestudio.game.mines.core.GameState;
@@ -11,18 +14,19 @@ import sk.tsystems.gamestudio.game.mines.core.Mine;
 import sk.tsystems.gamestudio.game.mines.core.Tile;
 
 import sk.tsystems.gamestudio.service.ScoreService.ScoreService;
-import sk.tsystems.gamestudio.service.ScoreService.ScoreServiceFile;
-import sk.tsystems.gamestudio.service.ScoreService.ScoreServiceJDBC;
 
-public class ConsoleUI {
+public class MinesConsoleUI implements Game {
 
 	private Field field;
-	private ScoreService scoreService = new ScoreServiceJDBC();
+	
+	@Autowired
+	private ScoreService scoreService;
+	
 	private int score;
 	private long time;
 	private long initialTime;
 
-	public ConsoleUI(Field field) {
+	public MinesConsoleUI(Field field) {
 		this.field = field;
 	}
 
@@ -45,6 +49,11 @@ public class ConsoleUI {
 		} else if (field.getState() == GameState.FAILED)
 			System.out.println("Game FAILED!");
 
+	}
+	
+	@Override
+	public String getName() {
+		return "Minesweeper";
 	}
 
 	private void processInput() {

@@ -3,6 +3,10 @@ package sk.tsystems.gamestudio.game.puzzle.ui;
 import java.util.Date;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import sk.tsystems.gamestudio.game.Game;
 import sk.tsystems.gamestudio.game.puzzle.core.Field;
 import sk.tsystems.gamestudio.game.puzzle.core.Tile;
 import sk.tsystems.gamestudio.entity.Score;
@@ -10,12 +14,13 @@ import sk.tsystems.gamestudio.service.ScoreService.ScoreService;
 import sk.tsystems.gamestudio.service.ScoreService.ScoreServiceFile;
 import sk.tsystems.gamestudio.service.ScoreService.ScoreServiceJDBC;
 
-public class ConsoleUI {
+public class PuzzleConsoleUI implements Game {
 	private Field field;
 	
-	private ScoreService scoreService = new ScoreServiceJDBC(); 
+	@Autowired
+	private ScoreService scoreService; 
 
-	public ConsoleUI() {
+	public PuzzleConsoleUI() {
 		field = new Field(2, 2);
 	}
 
@@ -29,6 +34,11 @@ public class ConsoleUI {
 		System.out.println("You won!");
 		System.out.println("Your score is " + field.getScore());
 		scoreService.addScore(new Score("n-Puzzle",System.getProperty("user.name"), field.getScore(), new Date()));
+	}
+	
+	@Override
+	public String getName() {
+		return "n-Puzzle";
 	}
 
 	private void print() {
