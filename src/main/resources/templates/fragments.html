@@ -59,6 +59,25 @@
 	</form>
 </div>
 
+<div th:fragment="rating(gameName)">
+	<h2>Ratings:</h2>
+	<table th:each="rating: ${@ratingService.getRatings(gameName)}">
+
+		<tr>
+			<td th:text="${rating.username}" />
+			<td th:text="${rating.rate}" />
+		</tr>
+	</table>
+</div>
+
+<div th:fragment="getAvg(gameName)">
+	<h2>Avarage rating:</h2>
+	<span th:text="${@ratingController.avg(gameName)}"/>
+
+</div>
+
+
+
 <div th:fragment="addrating(gameName)">
 		<h2>Rate this game!</h2>
 		<form action="/addrating" method="post"> <!-- method post - NOT show password in URL -->
@@ -67,11 +86,11 @@
 				<tr>
 					<td><label>Enter your rating:</label></td>
 					<td>
-					<input type="radio" name="rating" value="5" /><label>5</label>
-  				  	<input type="radio" name="rating" value="4" /><label>4</label>
-  					<input type="radio" name="rating" value="3" /><label>3</label>
-   					<input type="radio" name="rating" value="2" /><label>2</label>
-    				<input type="radio" name="rating" value="1" /><label>1</label>
+					<input type="radio" name="rate" value="5" /><label>5</label>
+  				  	<input type="radio" name="rate" value="4" /><label>4</label>
+  					<input type="radio" name="rate" value="3" /><label>3</label>
+   					<input type="radio" name="rate" value="2" /><label>2</label>
+    				<input type="radio" name="rate" value="1" /><label>1</label>
 					</td>
 				</tr>
 				

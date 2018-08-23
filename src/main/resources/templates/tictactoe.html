@@ -8,15 +8,15 @@
 </head>
 <body>
 
-<div th:replace = "fragments::header"></div>
+<h1>TicTacToe</h1>
+<a href="/tictactoeNew">New Game</a>
 
-<h1>Puzzle</h1>
-<a href="/puzzleNew">New Game</a>
+<span th:if="${markO}">Marking</span>
 
+<div>State: <span th:text="${@tictactoeController.gameState}"></span></div>
 
-<div>State: <span th:text="${@puzzleController.gameState}"></span></div>
+<div th:utext="${@tictactoeController.getHTMLField()}"/>
 
-<div th:utext="${@puzzleController.getHTMLField()}"/>
 
 <!-- Alternative using Thymeleaf -->
 <!-- 
@@ -30,13 +30,10 @@
 	</tr>
 </table>
  -->
-<hr/>
-
- <div th:replace="fragments::score('Puzzle')"></div>
- <div th:replace="fragments::addcomment('Puzzle')"></div>
- <div th:replace="fragments::comment('Puzzle')"></div>
- <div th:replace="fragments::addrating('Puzzle')"></div>
-
  
+ <div th:replace="fragments::addcomment('tictactoe')"></div>
+ <div th:replace="fragments::comment('tictactoe')"></div>
+ <div th:replace="fragments::addrating('tictactoe')"></div>
+<hr/>
 </body>
 </html>
