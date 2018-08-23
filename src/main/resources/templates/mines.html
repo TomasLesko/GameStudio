@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Minesweeper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="/css/stylesheet.css" />
+</head>
+<body>
+
+<div th:replace = "fragments::header"></div>
+
+<h1>Mines</h1>
+<a href="/minesNew">New Game</a>
+<span>Click:</span>
+<span th:if="${marking}">Marking</span>
+<span th:unless="${marking}">Opening</span>
+<a href="/minesChangeMarking">(Change)</a>
+<a href="/minesChangeSize"> (Change size)</a>
+
+<div>State: <span th:text="${@minesController.gameState}"></span></div>
+
+<div th:utext="${@minesController.getHTMLField()}"/>
+
+<!-- Alternative using Thymeleaf -->
+<!-- 
+<table class="mines_field">
+	<tr th:each="row : ${#numbers.sequence(0, field.rowCount-1)}">
+		<td th:each="col : ${#numbers.sequence(0, field.columnCount-1)}">
+			<a th:href='@{/mines(row=${row},column=${col})}'>
+				<img th:src="@{/images/mines/{name}.png(name=${@minesController.getImageName(field.getTile(row,col))})}"/>
+			</a>
+		</td>
+	</tr>
+</table>
+ -->
+ 
+ <div th:replace="fragments::score('Mines')"></div>
+ <div th:replace="fragments::addcomment('Mines')"></div>
+ <div th:replace="fragments::comment('Mines')"></div>
+ <div th:replace="fragments::addrating('Mines')"></div>
+
+<hr></hr>
+
+ 
+</body>
+</html>

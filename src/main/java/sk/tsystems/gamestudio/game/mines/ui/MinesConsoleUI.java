@@ -117,6 +117,7 @@ public class MinesConsoleUI implements Game {
 		System.out.println("No.  Player             Score");
 		System.out.println("-----------------------------");
 		for (Score score : scoreService.getBestScores("Mines")) {
+			score.setGame("hockey");
 			System.out.printf("%3d. %-16s %5d\n", index, score.getUsername(), score.getPoints());
 			index++;
 		}

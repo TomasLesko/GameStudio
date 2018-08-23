@@ -10,6 +10,7 @@ public class Field {
 	private final Tile[][] tiles;
 	private GameState state = GameState.PLAYING;
 	private int numberOfOpenTiles;
+	private long startMillis;
 
 	// konstruktor
 	public Field(int rowCount, int columnCount, int mineCount) {
@@ -20,9 +21,20 @@ public class Field {
 		this.mineCount = mineCount;
 		tiles = new Tile[rowCount][columnCount];
 		generate();
+		startMillis = System.currentTimeMillis();
 	}
 
 	// metody
+	
+	public int getScore() {
+		if(state == GameState.SOLVED) {
+			int seconds = (int)((System.currentTimeMillis() - startMillis) / 1000);
+			int score = rowCount * columnCount * 3 - seconds;
+			return score > 0 ? score : 0;
+		} else {
+			return 0;
+		}
+	}
 
 	private void generate() {
 		generateMines();
@@ -79,6 +91,9 @@ public class Field {
 	}
 
 	public void markTile(int row, int column) {
+		if (startMillis == 0) {
+			startMillis = System.currentTimeMillis();
+		}
 		Tile tile = tiles[row][column];
 		if (tile.getState().equals(TileState.CLOSED))
 			tile.setState(TileState.MARKED);
@@ -87,6 +102,9 @@ public class Field {
 	}
 
 	public void openTile(int row, int column) {
+		if (startMillis == 0) {
+			startMillis = System.currentTimeMillis();
+		}
 		Tile tile = tiles[row][column];
 
 		if (tile.getState().equals(TileState.CLOSED)) {

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>User</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="/css/stylesheet.css" />
+</head>
+<body>
+
+	<div th:if="${@userController.logged}">
+		You are already logged <a href="/logout">Logout</a>
+	</div>
+	<a href="/">Gamestudio</a>
+	<div th:unless="${@userController.logged}">
+		<h2>Login</h2>
+		<form action="/login">
+			<table>
+				<tr>
+					<td><label>Username</label></td>
+					<td><input type="text" name="username" required="required" /></td>
+				</tr>
+				<tr>
+					<td><label>Password</label></td>
+					<td><input type="password" name="password" required="required" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						value="Login" /></td>
+				</tr>
+			</table>
+		</form>
+		<h2>Register</h2>
+
+		<form action="/register" method="post">
+			<table>
+				<tr>
+					<td><label>Username</label></td>
+					<td><input type="text" name="username" required="required" /></td>
+				</tr>
+				<tr>
+					<td><label>Password</label></td>
+					<td><input type="password" name="password" required="required" /></td>
+				</tr>
+				<tr>
+					<td><label>Repeat password</label></td>
+					<td><input type="password" name="repeatPassword"
+						required="required" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<div th:if="${registerMessage}" th:text="${registerMessage}"
+							class="error-message">Message</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						value="Register" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

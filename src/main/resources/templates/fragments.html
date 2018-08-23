@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+	Welcome to <a href="/">Gamestudio </a> <a href="/login"
+		th:unless="${@userController.logged}">Login or Register</a> <span
+		th:if="${@userController.logged}"> You are logged as <span
+		th:text=" ${@userController.loggedUsername}"></span> <a href="/logout">Logout</a>
+
+
+	</span>
+	<hr></hr>
+</div>
+
+<div th:fragment="score(gameName)">
+	<h2>Scores:</h2>
+	<table>
+		<tr th:each="score: ${@scoreService.getBestScores(gameName)}">
+			<td th:text="${score.username}" />
+			<td th:text="${score.points}" />
+		</tr>
+	</table>
+</div>
+
+<div th:fragment="comment(gameName)">
+	<h2>Comments:</h2>
+	<table th:each="comment: ${@commentService.getComments(gameName)}">
+
+		<tr>
+			<td th:text="${comment.username}" />
+			<td th:text="${comment.added}" />
+		</tr>
+		<tr>
+			<td th:text="${comment.comm}" />
+		</tr>
+	</table>
+</div>
+
+<div th:fragment="addcomment(gameName)">
+	<h2>Add comment</h2>
+
+	<form action="/addcomment" method="post">
+		<input type="hidden" name="game" th:value="${gameName}"/>
+		<table>
+			<tr>
+				<td><label>Your comment</label></td>
+				<td><input type="text" name="comm" required="required" /></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<div th:if="${commentMessage}" th:text="${commentMessage}"
+						class="error-message">Message</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+				<input type="submit" value="Add comment" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<div th:fragment="addrating(gameName)">
+		<h2>Rate this game!</h2>
+		<form action="/addrating" method="post"> <!-- method post - NOT show password in URL -->
+		<input type="hidden" name="game" th:value="${gameName}"/>
+			<table>
+				<tr>
+					<td><label>Enter your rating:</label></td>
+					<td>
+					<input type="radio" name="rating" value="5" /><label>5</label>
+  				  	<input type="radio" name="rating" value="4" /><label>4</label>
+  					<input type="radio" name="rating" value="3" /><label>3</label>
+   					<input type="radio" name="rating" value="2" /><label>2</label>
+    				<input type="radio" name="rating" value="1" /><label>1</label>
+					</td>
+				</tr>
+				
+				<tr>
+				<td colspan="2" align="center">
+				<div th:if="${ratingMessage}" th:text="${ratingMessage}"
+							class="error-message">Message</div>
+				</td>
+				</tr>
+				
+				<tr>
+				<td colspan="2" align="center">
+				<input type="submit" value="Add Rating" />
+				</td>
+				</tr>
+			</table>
+		</form>
+		<hr/>
+</div>
+
+</html>

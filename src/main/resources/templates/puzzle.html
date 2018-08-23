@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Puzzle</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="/css/stylesheet.css" />
+</head>
+<body>
+
+<h1>Puzzle</h1>
+<a href="/puzzleNew">New Game</a>
+
+
+<div>State: <span th:text="${@puzzleController.gameState}"></span></div>
+
+<div th:utext="${@puzzleController.getHTMLField()}"/>
+
+<!-- Alternative using Thymeleaf -->
+<!-- 
+<table class="mines_field">
+	<tr th:each="row : ${#numbers.sequence(0, field.rowCount-1)}">
+		<td th:each="col : ${#numbers.sequence(0, field.columnCount-1)}">
+			<a th:href='@{/mines(row=${row},column=${col})}'>
+				<img th:src="@{/images/mines/{name}.png(name=${@minesController.getImageName(field.getTile(row,col))})}"/>
+			</a>
+		</td>
+	</tr>
+</table>
+ -->
+<hr/>
+<h2>Scores:</h2>
+<table>
+    <tr th:each="score: ${scores}">
+        <td th:text="${score.username}"/>
+        <td th:text="${score.points}"/>
+    </tr>
+</table>
+ 
+</body>
+</html>
