@@ -27,20 +27,28 @@ public class TictactoeController {
 
 	@Autowired
 	private UserController userController;
+	
+	private boolean xPlaying = true;
 
 	@RequestMapping("/tictactoe")
 	public String tictactoe(
-			@RequestParam(name = "state", required = false) TileState state,
-			@RequestParam(name = "row", required = false) Integer r,
-			@RequestParam(name = "column", required = false) Integer c, Model model) {
+			@RequestParam(name = "row", required = false) Integer row,
+			@RequestParam(name = "column", required = false) Integer column, 
+			Model model) throws TicTacToeException {
 		
-	if(field.getGameState() == GameState.PLAYING && r!=null && c!=null) {
-	
-	}
-
-	return"tictactoe";
-	
-
+		if(field.getGameState() == GameState.PLAYING 
+				&& row!=null 
+				&& column!=null) {
+			if (xPlaying) {
+				field.markX(row, column);
+			} else {
+				field.markO(row, column);
+			}
+			xPlaying = !xPlaying;
+		}
+		
+		model.addAttribute("xPlaying", xPlaying);
+		return "tictactoe";
 	}
 
 	@RequestMapping("/tictactoeNew")
@@ -58,20 +66,37 @@ public class TictactoeController {
 				Tile tile = field.getTile(row, column);
 				sb.format("<td>\n");
 				sb.format("<a href='/tictactoe?row=%d&column=%d'>", row, column);
-				sb.format( "" + " X " + " </a></td>");
-
-				
-				
-
+				sb.format("<img src='/images/tictactoe/" + getImageName(tile) + ".png'>\n");
+				sb.format("</a></td>");
 			}
 		}
 		sb.format("</table>\n");
 		return sb.toString();
-
+	}
+	
+	public String getImageName(Tile tile) { //public, len ak nepouzivame getHTMLField()
+		switch (tile.getState()) {
+		case EMPTY:
+			return "closed";
+		case O:
+			return "omarked";
+		case X:
+			return "xmarked";
+		}
+		throw new IllegalArgumentException("Uns. tile state " + tile.getState());
 	}
 
 
 	public String getGameState() {
-		return field.getGameState().name();
+		GameState state= field.getGameState();
+		switch (state) {
+			case PLAYING:
+				return "Playing...";
+			case O_PLAYER_WON:
+				return "Player O won";
+			case X_PLAYER_WON:
+				return "Player X won";
+		}
+		return "shouldn't happen";
 	}
 }

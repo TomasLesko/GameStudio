@@ -10,8 +10,8 @@
 
 <h1>TicTacToe</h1>
 <a href="/tictactoeNew">New Game</a>
-
-<span th:if="${markO}">Marking</span>
+<span th:if="${xPlaying}">X - turn</span>
+<span th:unless="${xPlaying}">O - turn</span>
 
 <div>State: <span th:text="${@tictactoeController.gameState}"></span></div>
 
