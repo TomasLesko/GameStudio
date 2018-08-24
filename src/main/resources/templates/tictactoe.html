@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<div th:replace = "fragments::header"></div>
+
 <h1>TicTacToe</h1>
 <a href="/tictactoeNew">New Game</a>
 <span th:if="${xPlaying}">X - turn</span>
@@ -34,6 +36,7 @@
  <div th:replace="fragments::addcomment('tictactoe')"></div>
  <div th:replace="fragments::comment('tictactoe')"></div>
  <div th:replace="fragments::addrating('tictactoe')"></div>
+ 
 <hr/>
 </body>
 </html>

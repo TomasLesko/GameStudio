@@ -31,6 +31,7 @@ public class CommentServiceJPA implements CommentService {
 			List<Comment> comments = entityManager
 					.createQuery("SELECT c FROM Comment c WHERE c.game = :gameName", Comment.class)
 					.setParameter("gameName", gameName)
+					.setMaxResults(5)
 					.getResultList();
 			return comments;
 		} catch (Exception ex) {

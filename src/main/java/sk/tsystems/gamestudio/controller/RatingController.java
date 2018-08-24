@@ -31,7 +31,7 @@ public class RatingController {
 		ratingService.changeRating(rating);
 		gamename = rating.getGame();
 		avg(gamename);
-		return rating.getGame();
+		return  rating.getGame();
 		
 	}
 
@@ -39,7 +39,7 @@ public class RatingController {
 		List<Rating> ratings = ratingService.getRatings(gameName);
 		double sum = 0;
 		for (Rating rating : ratings) {
-			sum= sum/rating.getRate();
+			sum= sum + rating.getRate();
 		}
 		double avg = sum/ratings.size();
 		return avg;

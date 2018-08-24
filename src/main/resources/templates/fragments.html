@@ -13,7 +13,7 @@
 
 <div th:fragment="score(gameName)">
 	<h2>Scores:</h2>
-	<table>
+	<table class="score_table">
 		<tr th:each="score: ${@scoreService.getBestScores(gameName)}">
 			<td th:text="${score.username}" />
 			<td th:text="${score.points}" />
