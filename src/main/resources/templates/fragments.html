@@ -1,10 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="header">
-	Welcome to <a href="/">Gamestudio </a> <a href="/login"
-		th:unless="${@userController.logged}">Login or Register</a> <span
-		th:if="${@userController.logged}"> You are logged as <span
-		th:text=" ${@userController.loggedUsername}"></span> <a href="/logout">Logout</a>
+	<h6>
+		Back to <a href="/">Gamestudio </a>
+	</h6>
+
+	<a href="/login" th:unless="${@userController.logged}">Login or
+		Register</a> <span th:if="${@userController.logged}"> You are
+		logged as <span th:text=" ${@userController.loggedUsername}"></span> <a
+		href="/logout">Logout</a>
 
 
 	</span>
@@ -14,6 +18,10 @@
 <div th:fragment="score(gameName)">
 	<h2>Scores:</h2>
 	<table class="score_table">
+		<tr>
+			<td>Player</td>
+			<td>Points</td>
+		</tr>
 		<tr th:each="score: ${@scoreService.getBestScores(gameName)}">
 			<td th:text="${score.username}" />
 			<td th:text="${score.points}" />
@@ -22,28 +30,34 @@
 </div>
 
 <div th:fragment="comment(gameName)">
-	<h2>Comments:</h2>
-	<table th:each="comment: ${@commentService.getComments(gameName)}">
-
+	<h3>Comments:</h3>
+	<table class="rating_table"
+		th:each="comment: ${@commentService.getComments(gameName)}">
+		<tr>
+			<td>Player</td>
+			<td>When</td>
+			<td>Comment</td>
+		</tr>
 		<tr>
 			<td th:text="${comment.username}" />
 			<td th:text="${comment.added}" />
-		</tr>
-		<tr>
 			<td th:text="${comment.comm}" />
 		</tr>
 	</table>
 </div>
 
+
 <div th:fragment="addcomment(gameName)">
-	<h2>Add comment</h2>
+	<h3>Add comment</h3>
 
 	<form action="/addcomment" method="post">
-		<input type="hidden" name="game" th:value="${gameName}"/>
+		<input type="hidden" name="game" th:value="${gameName}" />
 		<table>
 			<tr>
 				<td><label>Your comment</label></td>
 				<td><input type="text" name="comm" required="required" /></td>
+				<td colspan="2" align="center"><input type="submit"
+					value="Add comment" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -52,15 +66,33 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">
-				<input type="submit" value="Add comment" /></td>
+
 			</tr>
 		</table>
 	</form>
 </div>
 
+<div th:fragment="guessanumber(gameName)">
+	<form action="/guessanumber" method="post">
+		<table>
+			<tr>
+				<td><label>Your GUESS</label></td>
+				<td><input type="text" name="number" required="required" /></td>
+				<td colspan="2" align="center"><input type="submit"
+					value="submit" /></td>
+			</tr>
+			<tr>
+				<td>
+					<div id="hintGuess" th:text="${message}" ></div>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+
 <div th:fragment="rating(gameName)">
-	<h2>Ratings:</h2>
+	<h3>Ratings:</h3>
 	<table th:each="rating: ${@ratingService.getRatings(gameName)}">
 
 		<tr>
@@ -71,44 +103,44 @@
 </div>
 
 <div th:fragment="getAvg(gameName)">
-	<h2>Avarage rating:</h2>
-	<span th:text="${@ratingController.avg(gameName)}"/>
+	Avarage rating: <span th:text="${@ratingController.avg(gameName)}" />
 
 </div>
 
 
 
 <div th:fragment="addrating(gameName)">
-		<h2>Rate this game!</h2>
-		<form action="/addrating" method="post"> <!-- method post - NOT show password in URL -->
-		<input type="hidden" name="game" th:value="${gameName}"/>
-			<table>
-				<tr>
-					<td><label>Enter your rating:</label></td>
-					<td>
-					<input type="radio" name="rate" value="5" /><label>5</label>
-  				  	<input type="radio" name="rate" value="4" /><label>4</label>
-  					<input type="radio" name="rate" value="3" /><label>3</label>
-   					<input type="radio" name="rate" value="2" /><label>2</label>
-    				<input type="radio" name="rate" value="1" /><label>1</label>
-					</td>
-				</tr>
-				
-				<tr>
-				<td colspan="2" align="center">
-				<div th:if="${ratingMessage}" th:text="${ratingMessage}"
-							class="error-message">Message</div>
+	<h2>Rate this game!</h2>
+	<form action="/addrating" method="post">
+		<!-- method post - NOT show password in URL -->
+		<input type="hidden" name="game" th:value="${gameName}" />
+		<table>
+			<tr>
+				<td><label>Enter your rating:</label></td>
+			</tr>
+			<tr>
+				<td>Very good <input type="radio" name="rate" value="5" /><label>5</label>
+					<input type="radio" name="rate" value="4" /><label>4</label> <input
+					type="radio" name="rate" value="3" /><label>3</label> <input
+					type="radio" name="rate" value="2" /><label>2</label> <input
+					type="radio" name="rate" value="1" /><label>1</label> Very bad
 				</td>
-				</tr>
-				
-				<tr>
+			</tr>
+
+			<tr>
 				<td colspan="2" align="center">
-				<input type="submit" value="Add Rating" />
+					<div th:if="${ratingMessage}" th:text="${ratingMessage}"
+						class="error-message">Message</div>
 				</td>
-				</tr>
-			</table>
-		</form>
-		<hr/>
+			</tr>
+
+			<tr>
+				<td colspan="2" align="center"><input type="submit"
+					value="Add Rating" /></td>
+			</tr>
+		</table>
+	</form>
+	<hr />
 </div>
 
 </html>

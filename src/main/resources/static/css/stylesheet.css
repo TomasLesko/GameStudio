@@ -15,11 +15,15 @@
 
 body {
 	background-color: #ffffff;
+	background: url("../images/pictures/background.jpg") no-repeat center center fixed;
+	background-size: cover;
 	font-size: 12px;
 	font-family: Verdana, "Verdana CE", Arial, "Arial CE", "Helvetica CE",
 		sans-serif;
-	color: #000000;
+	color: #00BFFF;
 	margin: 10px;
+	
+	
 }
 
 h1 {
@@ -27,8 +31,9 @@ h1 {
 	font-size: 28px;
 	font-weight: bold;
 	margin: 0px;
-	padding: 0px;
-	color: #045491;
+	color: #00BFFF;
+	text-align: center;
+    
 }
 
 h2 {
@@ -38,17 +43,65 @@ h2 {
 	font-weight: bold;
 	margin: 0px;
 	padding: 0px;
-	color: #045491;
+	color: #00BFFF;
+	text-align: left;
+	
+}
+
+h3 {
+	font-family: Arial, "Arial CE", "Helvetica CE", sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #00BFFF;
+	
+}
+h4 {
+	font-family: Arial, "Arial CE", "Helvetica CE", sans-serif;
+	font-size:16px;
+	font-weight: bold;
+	color: #00BFFF;
+}
+
+h5 {
+	font-family: Arial, "Arial CE", "Helvetica CE", sans-serif;
+	font-size: 28px;
+	font-weight: bold;
+	margin: 0px;
+	background-color: black;
+	color: #00BFFF;
+	text-align: center;
+	border-radius: 1rem;
+    padding:0.5rem;
+}
+
+h6 {
+	text-align: left;
+	font-size: 12px;
+}
+
+#hintGuess {
+	color: red;
+	font-size: 16px;
+	text-decoration: underline;
+	
+}
+	
+
+ul {
+	font-family: Arial, "Arial CE", "Helvetica CE", sans-serif;
+	font-size:12px;
+	font-weight: bold;
+	color: #00BFFF;
 }
 
 a:link, a:visited {
-	color: #045491;
+	color: #00BFFF;
 	font-weight: bold;
 	text-decoration: none;
 }
 
 a:link:hover, a:visited:hover {
-	color: #045491;
+	color: #00BFFF;
 	font-weight: bold;
 	text-decoration: underline;
 }
@@ -153,15 +206,28 @@ a:link:hover, a:visited:hover {
 
 .score_table {
 	font-size: 9pt;
-	border: 1px solid black;
+	color: #00BFFF;
+	border: 1px solid white;
 	padding: 10;
 	table-layout: fixed;
+	width: 100%;
 }
 
 .score_table tr:nth-child(even) {
-	background-color: #00BFFF;
+	background-color: grey;
 }
 .score_table tr:nth-child(odd) {
-	background-color: #B0C4DE;
+	
+}
+
+.rating_table {
+	
+	border: 1px solid white;
+	width:100%;
+	table-layout: fixed;
+}
+
+.rating_table tr:nth-child(odd) {
+	background-color: grey;
 }
 

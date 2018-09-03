@@ -45,15 +45,15 @@ public class MinesController {
 		switch (fieldSize) {
 		case SMALL: 
 			fieldSize = FieldSize.MEDIUM;
-			field = new Field (18,18,9);
+			field = new Field (15,15,10);
 			break;
 		case MEDIUM:
 			fieldSize = FieldSize.BIG;
-			field = new Field (36,36,18);
+			field = new Field (20,20,15);
 			break;
 		case BIG:
 			fieldSize = FieldSize.SMALL;
-			field = new Field (9,9,2);
+			field = new Field (10,10,5);
 			break;
 		}
 		return "redirect:/mines";

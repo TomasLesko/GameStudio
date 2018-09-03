@@ -11,4 +11,5 @@ public interface RatingService {
 	
 	void changeRating(Rating rating);
 
+
 }

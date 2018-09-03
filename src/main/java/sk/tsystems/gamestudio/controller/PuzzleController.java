@@ -22,6 +22,9 @@ public class PuzzleController {
 	private static final String DB_GAME_NAME = "Puzzle";
 
 	private Field field = new Field(2, 2);
+	
+	@Autowired
+	private UserController userController;
 
 	@Autowired
 	private ScoreService scoreService;
@@ -32,7 +35,11 @@ public class PuzzleController {
 			field.moveTile(val);
 			if (field.isSolved()) {
 				scoreService.addScore(
-						new Score(DB_GAME_NAME, System.getProperty("user.name"), field.getScore(), new Date()));
+						new Score(
+								DB_GAME_NAME, 
+								userController.getLoggedUsername(), 
+								field.getScore(), 
+								new Date()));
 
 			}
 

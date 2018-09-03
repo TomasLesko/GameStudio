@@ -34,6 +34,8 @@ public class RatingController {
 		return  rating.getGame();
 		
 	}
+	
+
 
 	public double avg(String gameName) {
 		List<Rating> ratings = ratingService.getRatings(gameName);

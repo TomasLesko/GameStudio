@@ -10,18 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
-import sk.tsystems.gamestudio.game.mines.core.Clue;
-import sk.tsystems.gamestudio.game.mines.core.Mine;
+
 import sk.tsystems.gamestudio.game.tictactoe.core.Field;
 import sk.tsystems.gamestudio.game.tictactoe.core.GameState;
 import sk.tsystems.gamestudio.game.tictactoe.core.Tile;
-import sk.tsystems.gamestudio.game.tictactoe.core.TileState;
 import sk.tsystems.gamestudio.game.tictactoe.exception.TicTacToeException;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class TictactoeController {
-	private static final String DB_GAME_NAME = "Tictactoe";
 
 	private Field field = new Field(10, 10);
 

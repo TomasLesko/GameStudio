@@ -21,7 +21,7 @@ public class Rating {
 	private Rating () {
 		
 	}
-
+	
 
 	public Rating(String username, String game, int rate) {
 		super();
@@ -29,6 +29,7 @@ public class Rating {
 		this.game = game;
 		this.rate = rate;
 	}
+
 
 
 	public String getUsername() {
